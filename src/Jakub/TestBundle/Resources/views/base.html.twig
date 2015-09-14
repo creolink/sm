@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Test case Jakub Luczynski">
+        <meta name="author" content="Jakub Luczynski">
+
+        <title>Jakub - SM Test</title>
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+            <link href="{{ asset("bundles/jakubtest/css/styles.css") }}" rel="stylesheet">
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            <section class="menu">
+                <ul>
+                    <li><a href="{{ path('topics-list') }}">List all topics</a></li>
+                    <li><a href="{{ path('create-topic') }}">Create a topic</a></li>
+                    {% if topicId %}<li><a href="{{ path('create-article', { 'topicId': topicId }) }}">Create an article</a></li>{% endif %}
+                    {% if topicId %}<li><a href="{{ path('rest-delete-topic', { 'topicId': topicId }) }}">Delete a topic</a></li>{% endif %}
+                </ul>
+            </section>
+            {% if articleId %}
+                <section class="menu">
+                    <ul>
+                        <li><a href="{{ path('articles-list', { 'topicId': topicId }) }}">List all articles</a></li>
+                        <li><a href="{{ path('delete-article', { 'topicId': topicId, 'articleId': articleId }) }}">Delete an article</a></li>
+                    </ul>
+                </section>
+            {% endif %}
+            {% block content %}{% endblock %}
+            {% block javascripts %}
+                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+                <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+                {#<script type="text/javascript" src="{{ asset("bundles/jakubtest/js/common.js") }}"></script>#}
+            {% endblock %}
+        </div>
+    </body>
+</html>

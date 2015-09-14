@@ -1,0 +1,6 @@
+{% extends "JakubTestBundle::base.html.twig" %}
+
+{% block content %}
+    <h1>Create new article</h1>
+    {{ form(articleForm, {'attr': {'id': 'caform', 'class': 'restform'}}) }}
+{% endblock %}

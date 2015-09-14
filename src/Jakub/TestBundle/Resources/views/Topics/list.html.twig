@@ -1,0 +1,42 @@
+{% extends "JakubTestBundle::base.html.twig" %}
+
+{% block content %}
+    <h1>List of topics</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tfoot>
+            {% if topicsList|length > 0 %}
+            <tr>
+                <td colspan="3">Total: {{ topicsList|length }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">No topics</td>
+            </tr>
+            {% endif %}
+        </tfoot>
+        {% if topicsList|length > 0 %}
+        <tbody>
+            {% for row in topicsList %}
+            <tr>
+                <td>
+                    {{ row.id }}
+                </td>
+                <td>
+                    <a href="{{ path('articles-list', {'topicId':row.id}) }}">{{ row.title }}</a>
+                </td>
+                <td>
+                    <a href="{{ path('rest-delete-topic', {'topicId':row.id}) }}">delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% endif %}
+    </table>
+{% endblock %}

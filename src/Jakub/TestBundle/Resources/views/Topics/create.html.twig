@@ -1,0 +1,11 @@
+{% extends "JakubTestBundle::base.html.twig" %}
+
+{% block content %}
+    <h1>Create new topic</h1>
+    {{ form(topicForm, {'attr': {'id': 'ctform', 'class': 'restform'}}) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset("bundles/jakubtest/js/send.js") }}"></script>
+{% endblock %}

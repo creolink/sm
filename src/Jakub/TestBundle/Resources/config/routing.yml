@@ -1,0 +1,15 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+jakub_app:
+    resource: "@JakubTestBundle/Controller/"
+    type:     annotation
+    
+rest-create-topic:
+    type: rest
+    resource: Jakub\TestBundle\Controller\RestTopicController
+    
+rest-create-article:
+    type: rest
+    resource: Jakub\TestBundle\Controller\RestArticleController
+    

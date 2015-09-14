@@ -1,0 +1,16 @@
+{% extends "JakubTestBundle::base.html.twig" %}
+
+{% block content %}
+<h1>
+    Topic: {{ data.TpcTitle }}
+</h1>
+<h2>
+    Article: {{ data.ArtTitle }}
+</h2>
+<h3>
+    Author: {{ data.ArtAuthor }}
+</h3>
+<p>
+    {{ data.ArtText }}
+</p>
+{% endblock %}

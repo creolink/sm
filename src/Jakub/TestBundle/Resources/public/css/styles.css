@@ -1,0 +1,59 @@
+body {
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.menu
+{
+    margin-top: 10px;
+}
+
+.menu li
+{
+    display: inline-block;
+    padding: 5px;
+}
+
+h1, h2, h3, p
+{
+    margin: 10px;
+}
+
+table
+{
+    margin: 15px;
+}
+
+table td
+{
+    padding: 5px;
+    
+}
+
+div.container
+{
+    width: 700px;
+    margin: auto;
+}
+
+label
+{
+    width: 100px;
+    text-align: right;
+    padding: 5px 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+input, textarea
+{
+    width: 460px;
+    border: 1px solid #aaa;
+}
+
+button
+{
+    text-align: center;
+    display: block;
+    margin: 5px auto;
+}

@@ -1,0 +1,13 @@
+Jakub\TestBundle\Entity\Topic:
+    properties:
+        topicTitle:
+            - NotBlank: {message: "Write a topic"}
+
+Jakub\TestBundle\Entity\Article:
+    properties:
+        articleTitle:
+            - NotBlank: {message: "Write a topic for article"}
+        articleAuthor:
+            - NotBlank: {message: "Write an article author"}
+        articleText:
+            - NotBlank: {message: "Write a text for article"}
