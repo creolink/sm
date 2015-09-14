@@ -1,0 +1,4 @@
+jakub_test:
+    resource: "@JakubTestBundle/Resources/config/routing.yml"
+    prefix:   /
+
