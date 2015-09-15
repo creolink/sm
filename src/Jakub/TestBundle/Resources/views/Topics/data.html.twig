@@ -33,13 +33,13 @@
                     {{ row.id }}
                 </td>
                 <td>
-                    <a href="{{ path('article-data', { 'topicId' : topicId, 'articleId' : row.id }) }}">{{ row.title }}</a>
+                    <a href="{{ row.link }}">{{ row.title }}</a>
                 </td>
                 <td>
                     {{ row.author }}
                 </td>
                 <td>
-                    <a href="{{ path('delete-article', { 'topicId' : topicId, 'articleId' : row.id}) }}">delete</a>
+                    <a href="{{ row.dellink }}">delete</a>
                 </td>
             </tr>
             {% endfor %}

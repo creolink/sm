@@ -100,21 +100,32 @@ class RestTopicController extends FOSRestController
 
                 // topic data
                 $sql = "SELECT * FROM topic WHERE id = :id";
-                $topicData = $conn->fetchAssoc($sql, array(':id' => $topicId));
+				
+                if ($topicData = $conn->fetchAssoc($sql, array(':id' => $topicId))) {
+					$topicData['link'] = $this->generateUrl('articles-list', array('topicId' => $topicId), true);
+					
+					// articles
+					$sql = "SELECT * FROM article WHERE topic_id = :topic_id";
+					$stmt = $conn->prepare($sql);
+					$stmt->bindValue("topic_id", $topicId);
+					$stmt->execute();
+					$articlesList = $stmt->fetchAll();
 
-                // articles
-                $sql = "SELECT * FROM article WHERE topic_id = :topic_id";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue("topic_id", $topicId);
-                $stmt->execute();
-                $articlesList = $stmt->fetchAll();
-                
-                $jsonData = array(
-                        'topicData' => $topicData,
-                        'articlesList' => $articlesList
-                    );
+					if (is_array($articlesList)) {
+						foreach ($articlesList as &$articleData)
+						{
+							$articleData['link'] = $this->generateUrl('article-data', array('topicId' => $topicId, 'articleId' => $articleData['id']), true);
+							$articleData['dellink'] = $this->generateUrl('delete-article', array('topicId' => $topicId, 'articleId' => $articleData['id']), true);
+						}
+					}
 
-                return new JsonResponse($jsonData);
+					$arrayData = array(
+							'topicData' => $topicData,
+							'articlesList' => $articlesList
+						);
+
+					return new JsonResponse($arrayData);
+				}
             } catch (Exception $ex) {
                 throw $e;
             }
