@@ -12,7 +12,6 @@ class TopicDataController extends Controller
      * @Route(
      *      "/articles-list/{topicId}",
      *      name="articles-list",
-     *      options={"expose"=true},
      *      defaults={"topicId" = 0}
      * )
      * 

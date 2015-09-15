@@ -12,7 +12,7 @@ class RestTopicControllerTest extends WebTestCase
         
         $client->enableProfiler();
         
-        $crawler = $client->request(
+        $client->request(
                 'POST',
                 '/topic/create',
                 array(),
@@ -23,8 +23,7 @@ class RestTopicControllerTest extends WebTestCase
         
         $response = $client->getResponse();
         
-        $data = json_decode($response->getContent(), true);
-        $this->assertSame(array('result' => 'OK'), $data);
+        $this->assertSame(array('result' => 'OK'), json_decode($response->getContent(), true));
         
         if ($profile = $client->getProfile()) {
             $this->assertLessThan(
@@ -47,8 +46,16 @@ class RestTopicControllerTest extends WebTestCase
         $client = static::createClient();
         
         $client->request(
-            'DELETE',
-            '/topic/delete/10'
-        );
+                'DELETE',
+                '/topic/delete',
+                array(),
+                array(),
+                array('CONTENT_TYPE' => 'application/json'),
+                '{"topicId":"1"}'
+            );
+		
+		$response = $client->getResponse();
+		
+		$this->assertSame(array('result' => 'OK'), json_decode($response->getContent(), true));
     }
 }

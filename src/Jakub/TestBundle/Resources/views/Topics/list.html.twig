@@ -29,7 +29,7 @@
                     {{ row.id }}
                 </td>
                 <td>
-                    <a href="{{ path('articles-list', {'topicId':row.id}) }}">{{ row.title }}</a>
+                    <a href="{{ row.link }}">{{ row.title }}</a>
                 </td>
                 <td>
                     <a class="delete" rel="#{{ row.id }}">delete</a>

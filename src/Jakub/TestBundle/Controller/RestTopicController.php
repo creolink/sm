@@ -89,7 +89,7 @@ class RestTopicController extends FOSRestController
     }
     
     /**
-     * @Route("/topic/{topicId}", name="rest-get-topic", options={"expose"=true})
+     * @Route("/topic/{topicId}", name="rest-get-topic")
      * @Method("GET")
      */
     public function getAction($topicId)
@@ -129,6 +129,34 @@ class RestTopicController extends FOSRestController
                 throw $e;
             }
         }
+        
+        return new JsonResponse(array('result' => 'ERROR'));
+    }
+	
+    /**
+     * @Route("/topics", name="rest-get-topics")
+     * @Method("GET")
+     */
+    public function getListAction()
+    {
+		try {
+			$conn = $this->get('database_connection');
+
+			$sql = "SELECT * FROM topic";
+
+			$stmt = $conn->prepare($sql);
+			$stmt->execute();
+			if (($topicsList = $stmt->fetchAll()) && is_array($topicsList))
+			{
+				foreach ($topicsList as &$topicData) {
+					$topicData['link'] = $this->generateUrl('articles-list', array('topicId' => $topicData['id']), true);
+				}
+
+				return new JsonResponse($topicsList);
+			}
+		} catch (Exception $ex) {
+			throw $e;
+		}
         
         return new JsonResponse(array('result' => 'ERROR'));
     }

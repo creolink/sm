@@ -3,6 +3,7 @@
 namespace Jakub\TestBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -17,16 +18,22 @@ class TopicsListController extends Controller
      */
     public function indexAction()
     {
-        $conn = $this->get('database_connection');
-        
-        $sql = "SELECT * FROM topic";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $topicsList = $stmt->fetchAll();
+		$url = $this->generateUrl('rest-get-topics', array(), true);
+		
+		// we can do it with curl or fsock
+		if ($fileData = file_get_contents($url)) {
+			$jsonData = json_decode($fileData);
+
+			return array(
+				'topicId' => 0,
+				'topicsList' => $jsonData,
+				'articleId' => 0
+			);
+		}
         
         return array(
             'topicId' => 0,
-            'topicsList' => $topicsList,
+            'topicsList' => array(),
             'articleId' => 0
         );
     }
