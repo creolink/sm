@@ -34,7 +34,7 @@ $(document).ready(
                     success: function(response) {
                         if(response.result != 'OK')
                         {
-                            alert(response.result);
+                            alert(response.result); // show error
                         }
                         else
                         {

@@ -55,30 +55,37 @@ class RestTopicController extends FOSRestController
     }
     
     /**
-     * @Route("/topic/delete/{topicId}", name="rest-delete-topic", options={"expose"=true})
-     * @Method("GET")
+     * @Route("/topic/delete", name="rest-delete-topic", options={"expose"=true})
+     * @Method("DELETE")
      */
-    public function deleteAction($topicId)
+    public function deleteAction(Request $request)
     {
         $conn = $this->get('database_connection');
         $conn->beginTransaction();
         
-        try {
-            $sql = "DELETE FROM topic WHERE id = :id";
+		$jsonData = json_decode($request->getContent());
+		
+		if ($jsonData->topicId > 0)
+		{
+			try {
+				$sql = "DELETE FROM topic WHERE id = :id";
 
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue("id", $topicId);
-            $stmt->execute();
+				$stmt = $conn->prepare($sql);
+				$stmt->bindValue("id", $jsonData->topicId);
+				$stmt->execute();
 
-            //$conn->delete('topic', array('id' => $topicId)); // can be used instead of stmt
+				//$conn->delete('topic', array('id' => $topicId)); // can be used instead of stmt
 
-            $conn->commit();
-        } catch(Exception $e) {
-            $conn->rollback();
-            throw $e;
-        }
+				$conn->commit();
+
+				return new JsonResponse(array('result' => 'OK'));
+			} catch(Exception $e) {
+				$conn->rollback();
+				throw $e;
+			}
+		}
             
-        return $this->redirect($this->generateUrl('topics-list'));
+		return new JsonResponse(array('result' => 'ERROR'));
     }
     
     /**

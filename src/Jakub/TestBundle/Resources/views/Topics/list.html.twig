@@ -32,11 +32,16 @@
                     <a href="{{ path('articles-list', {'topicId':row.id}) }}">{{ row.title }}</a>
                 </td>
                 <td>
-                    <a href="{{ path('rest-delete-topic', {'topicId':row.id}) }}">delete</a>
+                    <a class="delete" rel="#{{ row.id }}">delete</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
         {% endif %}
     </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset("bundles/jakubtest/js/delete.js") }}"></script>
 {% endblock %}

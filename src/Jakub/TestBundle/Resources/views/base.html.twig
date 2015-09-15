@@ -22,7 +22,7 @@
                     <li><a href="{{ path('topics-list') }}">List all topics</a></li>
                     <li><a href="{{ path('create-topic') }}">Create a topic</a></li>
                     {% if topicId %}<li><a href="{{ path('create-article', { 'topicId': topicId }) }}">Create an article</a></li>{% endif %}
-                    {% if topicId %}<li><a href="{{ path('rest-delete-topic', { 'topicId': topicId }) }}">Delete a topic</a></li>{% endif %}
+                    {% if topicId %}<li><a class="delete" rel="#{{ topicId }}">Delete a topic</a></li>{% endif %}
                 </ul>
             </section>
             {% if articleId %}
