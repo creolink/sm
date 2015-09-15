@@ -24,11 +24,13 @@ class TopicsListController extends Controller
 		if ($fileData = file_get_contents($url)) {
 			$jsonData = json_decode($fileData);
 
-			return array(
-				'topicId' => 0,
-				'topicsList' => $jsonData,
-				'articleId' => 0
-			);
+			if (!isset($jsonData->result)) {
+				return array(
+					'topicId' => 0,
+					'topicsList' => $jsonData,
+					'articleId' => 0
+				);
+			}
 		}
         
         return array(

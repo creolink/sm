@@ -138,7 +138,7 @@ class RestTopicController extends FOSRestController
     }
 	
     /**
-     * @Route("/topic", name="rest-get-topics")
+     * @Route("/topics", name="rest-get-topics")
      * @Method("GET")
      */
     public function getListAction()

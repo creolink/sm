@@ -25,13 +25,15 @@ class TopicDataController extends Controller
             // we can do it with curl or fsock
             if ($fileData = file_get_contents($url)) {
                 $jsonData = json_decode($fileData);
-                
-                return array(
-                    'topicId' => $topicId,
-                    'articleId' => 0,
-                    'topicData' => $jsonData->topicData,
-                    'articlesList' => $jsonData->articlesList
-                );
+				
+				if (!isset($jsonData->result)) {
+					return array(
+						'topicId' => $topicId,
+						'articleId' => 0,
+						'topicData' => $jsonData->topicData,
+						'articlesList' => $jsonData->articlesList
+					);
+				}
             }
         }
         
