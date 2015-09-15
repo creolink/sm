@@ -1,7 +1,5 @@
 
-CREATE USER 'smetrics'@'localhost' IDENTIFIED BY 'smetrics';
-GRANT ALL ON smnewsportal.* TO 'smetrics'@'localhost';
-FLUSH PRIVILEGES;
+
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
