@@ -112,8 +112,7 @@ class RestTopicController extends FOSRestController
 					$articlesList = $stmt->fetchAll();
 
 					if (is_array($articlesList)) {
-						foreach ($articlesList as &$articleData)
-						{
+						foreach ($articlesList as &$articleData) {
 							$articleData['link'] = $this->generateUrl('article-data', array('topicId' => $topicId, 'articleId' => $articleData['id']), true);
 							$articleData['dellink'] = $this->generateUrl('delete-article', array('topicId' => $topicId, 'articleId' => $articleData['id']), true);
 						}
