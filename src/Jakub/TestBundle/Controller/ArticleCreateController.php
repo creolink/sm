@@ -16,7 +16,11 @@ use Jakub\TestBundle\Entity\Article;
 class ArticleCreateController extends Controller
 {
     /**
-     * @Route("/create-article/{topicId}", name="create-article")
+     * @Route(
+	 *		"/create-article/{topicId}",
+	 *		name="create-article",
+	 *		defaults={"topicId" = 0}
+	 * )
      * 
      * @Template("JakubTestBundle:Articles:create.html.twig")
      */

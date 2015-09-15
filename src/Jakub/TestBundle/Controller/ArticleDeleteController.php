@@ -12,7 +12,11 @@ use Jakub\TestBundle\Entity\Article;
 class ArticleDeleteController extends Controller
 {
     /**
-     * @Route("/delete-article/{topicId}/{articleId}", name="delete-article")
+     * @Route(
+	 *		"/delete-article/{topicId}/{articleId}",
+	 *		name="delete-article",
+	 *		defaults={"topicId" = 0, "articleId" = 0}
+	 * )
      */
     public function indexAction($topicId, $articleId)
     {

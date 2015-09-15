@@ -89,7 +89,11 @@ class RestTopicController extends FOSRestController
     }
     
     /**
-     * @Route("/topic/{topicId}", name="rest-get-topic")
+     * @Route(
+	 *		"/topic/{topicId}",
+	 *		name="rest-get-topic",
+	 *		defaults={"topicId" = 0}
+	 * )
      * @Method("GET")
      */
     public function getAction($topicId)
@@ -134,7 +138,7 @@ class RestTopicController extends FOSRestController
     }
 	
     /**
-     * @Route("/topics", name="rest-get-topics")
+     * @Route("/topic", name="rest-get-topics")
      * @Method("GET")
      */
     public function getListAction()

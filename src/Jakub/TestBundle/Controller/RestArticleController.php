@@ -16,7 +16,11 @@ use Jakub\TestBundle\Entity\Article;
 class RestArticleController extends FOSRestController
 {
     /**
-     * @Route("/article/create/{topicId}", name="rest-create-article")
+     * @Route(
+	 *		"/article/create/{topicId}",
+	 *		name="rest-create-article",
+	 *		defaults={"topicId" = 0}
+	 * )
      * @Method("POST")
      */
     public function saveAction($topicId, Request $request)
